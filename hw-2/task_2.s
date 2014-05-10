@@ -36,7 +36,7 @@ str_length:
 	.globl	main
 
 //Result is: input1 printed from output, string comparing input1 and input2,
-//there/not there indicating the presence of "a" letter, reversed input1
+//there/not there indicating the presence of "a" letter, reversed input1 OR "Nothing on input"
 main:
 //	Prolog
 	pushl	%ebp
@@ -153,6 +153,7 @@ nequal:
 	ret
 //////////////////////////////
 
+
 //Checks if "a" letter is present in input1
 //////////scan////////////////
 sca:
@@ -215,6 +216,8 @@ lodsto_loop:
 	movl	%ebp, %esp
 	popl	%ebp
 	ret
+//////////////////////////////
+
 
 //////////////////////////////
 invert_df:
