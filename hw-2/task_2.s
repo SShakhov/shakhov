@@ -6,19 +6,19 @@ printf_format:
 printf_invalid:
 	.string	"Nothing on input\n"
 
-//////////For cmp////////////
+//////////For cmp/////////////
 printf_format_0:
 	.string "0"
 printf_format_1:
 	.string "1"
-/////////////////////////////
+//////////////////////////////
 
-///////////For scan//////////
+///////////For scan///////////
 there_str:
 	.string	"There\n"
 thereno_str:
 	.string	"Not there\n"
-/////////////////////////////
+//////////////////////////////
 
 	.bss
 input1:
@@ -92,7 +92,7 @@ valid_input:
 
 
 //moves the input1 to output
-//////////move//////////////////
+//////////move////////////////
 mov:
 //	Prolog
 	pushl	%ebp
@@ -113,11 +113,11 @@ mov:
 	movl	%ebp, %esp
 	popl	%ebp
 	ret
-/////////////////////////////////
+//////////////////////////////
 
 
 //compares input1 and input2
-////////////compare//////////////
+////////////compare///////////
 cmp:
 //	Prolog
 	pushl	%ebp
@@ -151,10 +151,10 @@ nequal:
 	movl	%ebp, %esp
 	popl	%ebp
 	ret
-///////////////////////////////
+//////////////////////////////
 
 //Checks if "a" letter is present in input1
-//////////scan/////////////////
+//////////scan////////////////
 sca:
 //	Prolog
 	pushl	%ebp
@@ -182,7 +182,7 @@ no:
 	movl	%ebp, %esp
 	popl	%ebp
 	ret
-///////////////////////////////
+//////////////////////////////
 
 
 //Uses lods/stos commands to take chars from input1 and put them into output in reverse order
@@ -232,3 +232,4 @@ invert_df:
 	movl	%ebp, %esp
 	popl	%ebp
 	ret
+//////////////////////////////
