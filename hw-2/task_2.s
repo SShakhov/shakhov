@@ -94,6 +94,10 @@ valid_input:
 //moves the input1 to output
 //////////move////////////////
 mov:
+//	Prolog
+	pushl	%ebp
+	movl	%esp, %ebp
+	
 	pushl	%esi
 	pushl	%edi
 
@@ -105,6 +109,9 @@ mov:
 	popl	%edi
 	popl	%esi
 
+//	Epilog
+	movl	%ebp, %esp
+	popl	%ebp
 	ret
 //////////////////////////////
 
@@ -112,6 +119,10 @@ mov:
 //compares input1 and input2
 ////////////compare///////////
 cmp:
+//	Prolog
+	pushl	%ebp
+	movl	%esp, %ebp
+	
 	pushl	%esi
 	pushl	%edi
 
@@ -136,6 +147,9 @@ nequal:
 	popl	%edi
 	popl	%esi
 
+//	Epilog
+	movl	%ebp, %esp
+	popl	%ebp
 	ret
 //////////////////////////////
 
@@ -143,6 +157,10 @@ nequal:
 //Checks if "a" letter is present in input1
 //////////scan////////////////
 sca:
+//	Prolog
+	pushl	%ebp
+	movl	%esp, %ebp
+	
 	movb	$97, %al
 	movl	$input1, %edi
 	movl	str_length, %ecx
@@ -161,6 +179,9 @@ yes:
 	call	printf
 no:
 
+//	Epilog
+	movl	%ebp, %esp
+	popl	%ebp
 	ret
 //////////////////////////////
 
@@ -168,6 +189,10 @@ no:
 //Uses lods/stos commands to take chars from input1 and put them into output in reverse order
 //////////lod/sto/////////////
 lodsto:
+//	Prolog
+	pushl	%ebp
+	movl	%esp, %ebp
+	
 	movl	str_length, %eax
 	movl	$input1, %esi
 	addl	str_length, %esi
@@ -186,17 +211,27 @@ lodsto_loop:
 
 	movl	$10, (%edi)
 	
+//	Epilog
+	movl	%ebp, %esp
+	popl	%ebp
 	ret
 //////////////////////////////
 
 
 //////////////////////////////
 invert_df:
+//	Prolog
+	pushl	%ebp
+	movl	%esp, %ebp
+	
 	pushf
 	popw	%ax
 	xorw	$0x400, %ax
 	pushw	%ax
 	popf
 
+//	Epilog
+	movl	%ebp, %esp
+	popl	%ebp
 	ret
 //////////////////////////////
