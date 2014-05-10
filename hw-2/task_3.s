@@ -49,3 +49,4 @@ sum_loop:
 //	Epilog
 	movl	%ebp, %esp
 	popl	%ebp
+	ret
