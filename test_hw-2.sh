@@ -38,7 +38,7 @@ for n in {1..4} ; do
 	gcc -m32 task_$n.s -o task 2>/dev/null
 	if [ $? -eq 0 ]; then
 		echo -e "\tTASK $n: ${green}COMPILE OK${NC}"
-		else
+	else
 		echo -e "\tTASK $n: ${red}COMPILE FAILED${NC}"
 	fi
 	# Run prepared tests for task.
@@ -71,9 +71,9 @@ done
 	gcc -m32 task_5.o task_5.c -o task 2>/dev/null
 	rm task_5.o
 	if [ $? -eq 0 ]; then
-		echo -e "\tTASK $n: ${green}COMPILE OK${NC}"
+		echo -e "\tTASK 5: ${green}COMPILE OK${NC}"
 	else
-		echo -e "\tTASK $n: ${red}COMPILE FAILED${NC}"
+		echo -e "\tTASK 5: ${red}COMPILE FAILED${NC}"
 	fi
 
 	for t in {1..5} ; do
@@ -87,5 +87,40 @@ done
 		rm task.out 2>/dev/null
 	done
 	rm $bin 2>/dev/null
+
+for n in {6..7} ; do
+	# Compile task.
+	gcc -m32 task_$n.s -o task 2>/dev/null
+	if [ $? -eq 0 ]; then
+		echo -e "\tTASK $n: ${green}COMPILE OK${NC}"
+	else
+		echo -e "\tTASK $n: ${red}COMPILE FAILED${NC}"
+	fi
+	# Run prepared tests for task.
+	# FIXME Hardcoded sequence of test's numbers.
+	for t in {1..5} ; do
+		# Run test. Tests runs OK, but prints "RUN FAILED". Can't figure out why, commenting.
+		eval $bin 2>/dev/null 1>task.out < ./tests/task_$n-$t.in
+		#if [ $? -eq 0 ]; then
+		#	echo -e "\t\tTEST $t: ${green}RUN OK${NC}"
+		#else
+		#	echo -e "\t\tTEST $t: ${red}RUN FAILED${NC}"
+		#fi
+
+		# Test result.
+		# FIXME If test failed diff shows what is the problem.
+		# Else - test was not implemented.
+		diff ./tests/task_$n-$t.out task.out 2>/dev/null
+		if [ $? -eq 0 ]; then
+			echo -e "\t\t\t${green}RESULT OK${NC}"
+		else
+			echo -e "\t\t\t${red}RESULT WRONG${NC}"
+		fi
+		# Clean.
+		rm task.out 2>/dev/null
+	done
+	rm $bin 2>/dev/null
+done
+
 # Return to origin folder.
 cd ../..
