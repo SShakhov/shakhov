@@ -17,6 +17,8 @@ output:
 	.space	200
 save_eax:
 	.space	4
+	
+//	If it equals 2 then both conditions are satisfied
 true_false:
 	.space	4, 0
 input_length:
@@ -73,6 +75,7 @@ main_escape:
 	popl	%ebp
 	ret
 
+//	Checks if byte in %bl is a letter
 check_byte:
 //	Prolog
 	pushl	%ebp
@@ -134,6 +137,8 @@ condition5:
 	jge	replace
 	stosb
 	jmp	the_case_escape
+	
+//	If the letter is capital then it is replaced with lowercase
 replace:
 	addb	$32, %al
 	stosb
