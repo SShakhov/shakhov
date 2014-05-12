@@ -1,3 +1,6 @@
+//Program takes as an input a hex number that corresponds
+//to the desired state of %flags. It then sets flags and prints 
+//the state of CF, ZF, SF, OF as 4 digits
 	.data
 printf_1:
 	.string	"1"
@@ -5,6 +8,12 @@ printf_0:
 	.string	"0"
 printf_nl:
 	.string	"\n"
+scanf_format:
+	.string	"%x"
+
+	.bss
+input:
+	.space	2
 
 	.text
 
@@ -48,14 +57,24 @@ go_on4:
 	.globl main
 main:
 //	Prolog
-	pushl	%ebp
+	pushal
 	movl	%esp, %ebp
+
+	pushl	$input
+	pushl	$scanf_format
+	call	scanf	
+
+	pushf
+	popl	%eax
+	movw	input, %ax
+	pushl	%eax
+	popf
 
 	outf
 
 //	Epilog
 	movl	%ebp, %esp
-	popl	%ebp
+	popal
 	ret
 
 //	Using interruption since printf changes flags and registers
