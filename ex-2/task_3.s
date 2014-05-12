@@ -13,6 +13,8 @@ buffer:
 	.space	20
 save_eax:
 	.space	4
+save_ecx:
+	.space	4
 
 	.text
 
@@ -75,12 +77,15 @@ main:
 
 	movl	$5, %ecx
 	movl	$buffer, %eax
+//!!!Forgot to save ecx from being changed by scanf. Fixed. Works perfectly now.
 scan_loop:
 	pushl	%eax
 	pushl	$scanf_format
 	movl	%eax, save_eax
+	movl	%ecx, save_ecx
 	call	scanf
 	movl	save_eax, %eax
+	movl	save_ecx, %ecx
 	addl	$4, %eax
 	loop	scan_loop
 
