@@ -46,15 +46,10 @@ shift:
 	roll	$4, %eax
 	movl	$8, %ecx
 
-pre_print_loop:
+print_loop:
 	movl	%eax, %ebx
 	andl	$0xF, %ebx
-	cmpl	$0, %ebx
 	roll	$4, %eax
-	jne	print_loop
-	loop	pre_print_loop
-
-print_loop:
 	pushl	%ebx
 	pushl	$printf_format
 	movl	%eax, save_eax
@@ -63,9 +58,6 @@ print_loop:
 	movl	save_eax, %eax
 	movl	save_ecx, %ecx
 
-	movl	%eax, %ebx
-	andl	$0xF, %ebx
-	roll	$4, %eax
 	loop	print_loop
 
 	pushl	$printf_nl
