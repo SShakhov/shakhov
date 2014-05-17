@@ -30,16 +30,10 @@ main:
 	roll	$1, %eax
 	movl	$32, %ecx
 
-//	This loop is to get rid of the zeros in front
-pre_print_loop:
-	movl	%eax, %ebx
-	andl	$0x1, %ebx
-	cmpl	$0, %ebx
-	roll	%eax
-	jne	print_loop
-	loop	pre_print_loop
 
 print_loop:
+	movl	%eax, %ebx
+	andl	$0x1, %ebx
 	pushl	%ebx
 	pushl	$printf_format
 	movl	%eax, save_eax
@@ -48,13 +42,15 @@ print_loop:
 	movl	save_eax, %eax
 	movl	save_ecx, %ecx
 
-	movl	%eax, %ebx
-	andl	$0x1, %ebx
+
 	roll	%eax
 	loop	print_loop
 
+
 	pushl	$printf_nl
 	call	printf
+
+
 
 //	Epilogue
 	movl	%ebp, %esp
